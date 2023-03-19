@@ -1,5 +1,12 @@
 @use "../abstracts" as style;
 
+.rangePlayer {
+  width: 100%;
+  // background-color: red;
+  input {
+    width: 100%;
+  }
+}
 .containerPlayer {
   @include style.flexCenter;
   margin-top: 20px;

@@ -18,9 +18,20 @@ export const Home = () => {
     }
   }, [isPlaying]);
 
+  const onPlaying = () => {
+    const duration = audioElem.current.duration;
+    const ct = audioElem.current.currentTime;
+
+    setCurrentSong({
+      ...currentSong,
+      progress: (ct / duration) * 100,
+      length: duration,
+    });
+  };
+
   return (
     <div className="container">
-      <audio src={currentSong.url} ref={audioElem} />;
+      <audio src={currentSong.url} ref={audioElem} onTimeUpdate={onPlaying} />
       <Player
         songs={songs}
         setSongs={setSongs}
@@ -28,6 +39,7 @@ export const Home = () => {
         setIsPlaying={setIsPlaying}
         currentSong={currentSong}
         setCurrentSong={setCurrentSong}
+        audioElem={audioElem}
       />
     </div>
   );

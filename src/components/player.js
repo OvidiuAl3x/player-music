@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import {
   IoPauseCircleSharp,
   IoPlayCircleSharp,
@@ -13,12 +14,22 @@ export const Player = ({
   setCurrentSong,
   isPlaying,
   setIsPlaying,
+  audioElem,
 }) => {
+  const clickRef = useRef();
   const PlayPause = () => {
     setIsPlaying(!isPlaying);
   };
 
-  // console.log(currentSong);
+  // console.log(currentSong.progress);
+
+  const checkWidth = (e) => {
+    let width = clickRef.current.value;
+    const offset = e.nativeEvent.offsetX;
+
+    const divprogress = (offset / width) * 100;
+    audioElem.current.currentTime = (divprogress / 100) * currentSong.length;
+  };
 
   return (
     <div className="containerMusic">
@@ -27,6 +38,18 @@ export const Player = ({
         width="300px"
       />
       <p style={{ textAlign: "center" }}>{currentSong.title}</p>
+      <div className="rangePlayer">
+        <span>{currentSong.length / 60}</span>
+        <input
+          type="range"
+          id="time"
+          name="time"
+          value={
+            currentSong.progress === undefined ? "0" : currentSong.progress
+          }
+          ref={clickRef}
+        />
+      </div>
       <div className="containerPlayer">
         <IoPlaySkipBackSharp className="back" />
 
