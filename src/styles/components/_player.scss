@@ -1,0 +1,16 @@
+@use "../abstracts" as style;
+
+.containerPlayer {
+  @include style.flexCenter;
+  margin-top: 20px;
+  .back,
+  .skip,
+  .play {
+    font-size: 25px;
+    margin: 0px 10px;
+    cursor: pointer;
+  }
+  .play {
+    font-size: 40px;
+  }
+}
