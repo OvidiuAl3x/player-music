@@ -18,14 +18,13 @@ export const Player = ({
   setIsPlaying,
   audioElem,
   skipToNext,
+  setMutedSong,
+  mutedSong,
 }) => {
   const [playInLoop, setPlayInLoop] = useState(false);
   const clickRef = useRef();
   const PlayPause = () => {
-    setIsPlaying(true);
-  };
-  const PlayPause2 = () => {
-    setIsPlaying(false);
+    setIsPlaying(!isPlaying);
   };
 
   const checkWidth = (e) => {
@@ -52,6 +51,10 @@ export const Player = ({
     audioElem.current.loop = playInLoop;
   }, [playInLoop]);
 
+  const Muted = () => {
+    setMutedSong(!mutedSong);
+  };
+
   return (
     <div className="containerMusic">
       <img
@@ -74,14 +77,18 @@ export const Player = ({
         </div>
       </div>
       <div className="containerPlayer">
-        <IoVolumeMuteOutline className="back" />
-        <IoVolumeHighOutline className="back" />
+        {mutedSong ? (
+          <IoVolumeMuteOutline className="back" onClick={Muted} />
+        ) : (
+          <IoVolumeHighOutline className="back" onClick={Muted} />
+        )}
+
         <IoPlaySkipBackSharp className="back" onClick={skipBack} />
 
         {!isPlaying ? (
           <IoPlayCircleSharp onClick={PlayPause} className="play" />
         ) : (
-          <IoPauseCircleSharp onClick={PlayPause2} className="play" />
+          <IoPauseCircleSharp onClick={PlayPause} className="play" />
         )}
         <IoPlaySkipForwardSharp className="skip" onClick={skipToNext} />
 
