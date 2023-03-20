@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { songsdata } from "./audios";
 import { Player } from "./player";
-import music from "../components/negotiator_0302_demo.mp3";
 
 export const Home = () => {
   const [songs, setSongs] = useState(songsdata);
