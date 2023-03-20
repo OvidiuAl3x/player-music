@@ -1,11 +1,13 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   IoPauseCircleSharp,
   IoPlayCircleSharp,
   IoPlaySkipBackSharp,
   IoPlaySkipForwardSharp,
+  IoVolumeHighOutline,
+  IoVolumeMuteOutline,
 } from "react-icons/io5";
-import { songsdata } from "./audios";
+import { TbRepeat, TbRepeatOff } from "react-icons/tb";
 
 export const Player = ({
   songs,
@@ -15,13 +17,16 @@ export const Player = ({
   isPlaying,
   setIsPlaying,
   audioElem,
+  skipToNext,
 }) => {
+  const [playInLoop, setPlayInLoop] = useState(false);
   const clickRef = useRef();
   const PlayPause = () => {
-    setIsPlaying(!isPlaying);
+    setIsPlaying(true);
   };
-
-  // console.log(currentSong.progress);
+  const PlayPause2 = () => {
+    setIsPlaying(false);
+  };
 
   const checkWidth = (e) => {
     let width = clickRef.current.clientWidth;
@@ -34,8 +39,8 @@ export const Player = ({
   };
 
   const skipBack = () => {
-    const index = songs.findIndex((x) => x.title === currentSong.title);
-    if (index === 0) {
+    const index = songs.findIndex((x) => x.title == currentSong.title);
+    if (index == 0) {
       setCurrentSong(songs[songs.length - 1]);
     } else {
       setCurrentSong(songs[index - 1]);
@@ -43,30 +48,9 @@ export const Player = ({
     audioElem.current.currentTime = 0;
   };
 
-  const skipToNext = () => {
-    const index = songs.findIndex((x) => x.title === currentSong.title);
-    if (index === songs.length - 1) {
-      setCurrentSong(songs[0]);
-    } else {
-      setCurrentSong(songs[index + 1]);
-    }
-    audioElem.current.currentTime = 0;
-  };
-
-  // useEffect(() => {
-  //   if (currentSong.progress === 100) {
-  //     audioElem.current.currentTime = 0;
-  //     skipToNext() 
-  //   }
-  // }, [currentSong]);
-
-  // useCallback(()=>{
-  //   if (currentSong.progress === 100) {
-  //   skipToNext();
-  //   }
-  // },[currentSong.progres])
-
-  console.log(currentSong.length, currentSong.progress);
+  useEffect(() => {
+    audioElem.current.loop = playInLoop;
+  }, [playInLoop]);
 
   return (
     <div className="containerMusic">
@@ -78,18 +62,37 @@ export const Player = ({
       <div className="rangePlayer">
         {/* <span>{currentSong.length / 60}</span> */}
         <div className="rangeBackground" onClick={checkWidth} ref={clickRef}>
-          <div style={{ width: `${currentSong.progress + "%"}` }}></div>
+          <div
+            style={{
+              width: `${
+                currentSong.progress === undefined
+                  ? "0%"
+                  : currentSong.progress + "%"
+              }`,
+            }}
+          ></div>
         </div>
       </div>
       <div className="containerPlayer">
+        <IoVolumeMuteOutline className="back" />
+        <IoVolumeHighOutline className="back" />
         <IoPlaySkipBackSharp className="back" onClick={skipBack} />
 
         {!isPlaying ? (
           <IoPlayCircleSharp onClick={PlayPause} className="play" />
         ) : (
-          <IoPauseCircleSharp onClick={PlayPause} className="play" />
+          <IoPauseCircleSharp onClick={PlayPause2} className="play" />
         )}
         <IoPlaySkipForwardSharp className="skip" onClick={skipToNext} />
+
+        <label>
+          <input
+            type="checkbox"
+            checked={playInLoop}
+            onChange={(e) => setPlayInLoop(e.target.checked)}
+          />
+          {playInLoop ? <TbRepeat /> : <TbRepeatOff />}
+        </label>
       </div>
     </div>
   );

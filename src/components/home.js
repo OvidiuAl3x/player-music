@@ -13,7 +13,7 @@ export const Home = () => {
     if (isPlaying) {
       audioElem.current.play();
     } else {
-      audioElem.current.pause();
+      audioElem.current.play();
     }
   }, [isPlaying]);
 
@@ -28,9 +28,29 @@ export const Home = () => {
     });
   };
 
+  const skipToNext = () => {
+    const index = songs.findIndex((x) => x.title == currentSong.title);
+
+    if (index == songs.length - 1) {
+      setCurrentSong(songs[0]);
+    } else {
+      setCurrentSong(songs[index + 1]);
+    }
+    audioElem.current.currentTime = 0;
+  };
+
+  console.log(isPlaying);
+
   return (
     <div className="container">
-      <audio src={currentSong.url} ref={audioElem} onTimeUpdate={onPlaying} />
+      <audio
+        src={currentSong.url}
+        ref={audioElem}
+        onTimeUpdate={onPlaying}
+        // onEnded={skipToNext}
+        // muted={false}
+        // autoPlay={false}
+      />
       <Player
         songs={songs}
         setSongs={setSongs}
@@ -39,6 +59,7 @@ export const Home = () => {
         currentSong={currentSong}
         setCurrentSong={setCurrentSong}
         audioElem={audioElem}
+        skipToNext={skipToNext}
       />
     </div>
   );
