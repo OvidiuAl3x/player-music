@@ -6,6 +6,7 @@ export const Home = () => {
   const [songs, setSongs] = useState(songsdata);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSong, setCurrentSong] = useState(songsdata[0]);
+  const [mutedSong, setMutedSong] = useState(false);
 
   const audioElem = useRef();
 
@@ -28,9 +29,27 @@ export const Home = () => {
     });
   };
 
+  const skipToNext = () => {
+    const index = songs.findIndex((x) => x.title == currentSong.title);
+
+    if (index == songs.length - 1) {
+      setCurrentSong(songs[0]);
+    } else {
+      setCurrentSong(songs[index + 1]);
+    }
+    audioElem.current.currentTime = 0;
+  };
+
   return (
     <div className="container">
-      <audio src={currentSong.url} ref={audioElem} onTimeUpdate={onPlaying} />
+      <audio
+        src={currentSong.url}
+        ref={audioElem}
+        onTimeUpdate={onPlaying}
+        onEnded={skipToNext}
+        muted={mutedSong}
+        autoPlay={isPlaying}
+      />
       <Player
         songs={songs}
         setSongs={setSongs}
@@ -39,6 +58,9 @@ export const Home = () => {
         currentSong={currentSong}
         setCurrentSong={setCurrentSong}
         audioElem={audioElem}
+        skipToNext={skipToNext}
+        setMutedSong={setMutedSong}
+        mutedSong={mutedSong}
       />
     </div>
   );
