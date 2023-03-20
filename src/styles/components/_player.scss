@@ -20,6 +20,7 @@
 .containerPlayer {
   @include style.flexCenter;
   margin-top: 20px;
+
   .back,
   .skip,
   .play {
@@ -29,5 +30,20 @@
   }
   .play {
     font-size: 40px;
+  }
+  .sound {
+    font-size: 20px;
+    transform: translate(-45px, 0px);
+  }
+
+  .labelRepeat {
+    input {
+      display: none;
+    }
+    .repeat {
+      font-size: 18px;
+      margin-top: 2px;
+      transform: translate(35px, 1px);
+    }
   }
 }

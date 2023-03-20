@@ -78,9 +78,9 @@ export const Player = ({
       </div>
       <div className="containerPlayer">
         {mutedSong ? (
-          <IoVolumeMuteOutline className="back" onClick={Muted} />
+          <IoVolumeMuteOutline className="sound" onClick={Muted} />
         ) : (
-          <IoVolumeHighOutline className="back" onClick={Muted} />
+          <IoVolumeHighOutline className="sound" onClick={Muted} />
         )}
 
         <IoPlaySkipBackSharp className="back" onClick={skipBack} />
@@ -92,13 +92,13 @@ export const Player = ({
         )}
         <IoPlaySkipForwardSharp className="skip" onClick={skipToNext} />
 
-        <label>
+        <label className="labelRepeat">
           <input
             type="checkbox"
             checked={playInLoop}
             onChange={(e) => setPlayInLoop(e.target.checked)}
           />
-          {playInLoop ? <TbRepeat /> : <TbRepeatOff />}
+          {playInLoop ? <TbRepeat className="repeat"/> : <TbRepeatOff className="repeat"/>}
         </label>
       </div>
     </div>
