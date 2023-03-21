@@ -24,6 +24,7 @@ export const Home = () => {
 
     setCurrentSong({
       ...currentSong,
+      duration:ct,
       progress: (ct / duration) * 100,
       length: duration,
     });
@@ -31,7 +32,6 @@ export const Home = () => {
 
   const skipToNext = () => {
     const index = songs.findIndex((x) => x.title == currentSong.title);
-
     if (index == songs.length - 1) {
       setCurrentSong(songs[0]);
     } else {

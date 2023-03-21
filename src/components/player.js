@@ -55,6 +55,33 @@ export const Player = ({
     setMutedSong(!mutedSong);
   };
 
+  const ProgressSong = () => {
+    const progress = currentSong.duration;
+    let sec = new Number();
+    let min = new Number();
+    sec = Math.floor(progress);
+    min = Math.floor(sec / 60);
+    min = min >= 10 ? min : "0" + min;
+    sec = Math.floor(sec % 60);
+    sec = sec >= 10 ? sec : "0" + sec;
+
+    return min + ":" + sec;
+  };
+
+  const DurationSong = () => {
+    const length = currentSong.length;
+    let sec = new Number();
+    let min = new Number();
+    sec = Math.floor(length);
+    min = Math.floor(sec / 60);
+    min = min >= 10 ? min : "0" + min;
+    sec = Math.floor(sec % 60);
+    sec = sec >= 10 ? sec : "0" + sec;
+
+    return min + ":" + sec;
+  };
+
+  console.log(currentSong.duration);
   return (
     <div className="containerMusic">
       <img
@@ -63,7 +90,24 @@ export const Player = ({
       />
       <p style={{ textAlign: "center" }}>{currentSong.title}</p>
       <div className="rangePlayer">
-        {/* <span>{currentSong.length / 60}</span> */}
+        <div className="musicTime">
+          {currentSong.length === undefined || currentSong.duration === 0 ? (
+            <>
+              <span>00:00</span>
+              <span>00:00</span>
+            </>
+          ) : (
+            <>
+              <span>
+                <ProgressSong />
+              </span>
+              <span>
+                <DurationSong />
+              </span>
+            </>
+          )}
+        </div>
+
         <div className="rangeBackground" onClick={checkWidth} ref={clickRef}>
           <div
             style={{
@@ -98,7 +142,11 @@ export const Player = ({
             checked={playInLoop}
             onChange={(e) => setPlayInLoop(e.target.checked)}
           />
-          {playInLoop ? <TbRepeat className="repeat"/> : <TbRepeatOff className="repeat"/>}
+          {playInLoop ? (
+            <TbRepeat className="repeat" />
+          ) : (
+            <TbRepeatOff className="repeat" />
+          )}
         </label>
       </div>
     </div>

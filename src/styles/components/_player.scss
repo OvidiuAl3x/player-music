@@ -2,7 +2,6 @@
 
 .rangePlayer {
   width: 100%;
-  // background-color: red;
   .rangeBackground {
     min-width: 100%;
     background-color: #797878;
@@ -15,6 +14,10 @@
       height: 100%;
       border-radius: 15px;
     }
+  }
+  .musicTime {
+    display: flex;
+    justify-content: space-between;
   }
 }
 .containerPlayer {
@@ -34,9 +37,11 @@
   .sound {
     font-size: 20px;
     transform: translate(-45px, 0px);
+    cursor: pointer;
   }
 
   .labelRepeat {
+    cursor: pointer;
     input {
       display: none;
     }
