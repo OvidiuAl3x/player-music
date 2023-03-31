@@ -15,7 +15,7 @@
   );
   padding: 20px 20px 50px 20px;
   border-radius: 26px;
-  img{
+  img {
     border-radius: 12px;
   }
 }
@@ -30,7 +30,31 @@
     border-radius: 15px;
     div {
       width: 0%;
-      background-color: red;
+      background-image: linear-gradient(
+        10deg,
+        hsl(315deg 73% 10%) 0%,
+        hsl(351deg 57% 22%) 5%,
+        hsl(1deg 57% 29%) 16%,
+        hsl(6deg 65% 33%) 27%,
+        hsl(9deg 70% 36%) 37%,
+        hsl(11deg 74% 39%) 46%,
+        hsl(12deg 78% 42%) 54%,
+        hsl(13deg 82% 44%) 62%,
+        hsl(14deg 85% 46%) 68%,
+        hsl(15deg 88% 48%) 73%,
+        hsl(16deg 92% 50%) 78%,
+        hsl(17deg 95% 53%) 83%,
+        hsl(21deg 95% 57%) 86%,
+        hsl(24deg 96% 59%) 89%,
+        hsl(27deg 96% 61%) 92%,
+        hsl(31deg 96% 62%) 94%,
+        hsl(34deg 97% 64%) 96%,
+        hsl(37deg 97% 65%) 98%,
+        hsl(40deg 98% 67%) 99%,
+        hsl(44deg 99% 68%) 99%,
+        hsl(47deg 99% 69%) 100%,
+        hsl(50deg 100% 70%) 100%
+      );
       height: 100%;
       border-radius: 15px;
     }
