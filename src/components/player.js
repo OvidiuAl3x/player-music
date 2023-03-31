@@ -85,10 +85,12 @@ export const Player = ({
   return (
     <div className="containerMusic">
       <img
-        src="https://marketplace.canva.com/EAE1S08POOg/1/0/1600w/canva-relaxing-minimal-music-album-cover-art-qA_k0YNdr-E.jpg"
+        src={currentSong.image}
         width="300px"
       />
-      <p style={{ textAlign: "center" }}>{currentSong.title}</p>
+      
+      <p style={{ textAlign: "center",marginBottom:"4px",fontWeight:"bold" }}>{currentSong.title}</p>
+      <p style={{ textAlign: "center", fontSize:"14px", marginTop:"0px", color:"#272727" }}>{currentSong.artist}</p>
       <div className="rangePlayer">
         <div className="musicTime">
           {currentSong.length === undefined || currentSong.duration === 0 ? (
