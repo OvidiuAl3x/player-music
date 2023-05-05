@@ -31,8 +31,8 @@ export const Home = () => {
   };
 
   const skipToNext = () => {
-    const index = songs.findIndex((x) => x.title == currentSong.title);
-    if (index == songs.length - 1) {
+    const index = songs.findIndex((x) => x.title === currentSong.title);
+    if (index === songs.length - 1) {
       setCurrentSong(songs[0]);
     } else {
       setCurrentSong(songs[index + 1]);

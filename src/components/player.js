@@ -38,8 +38,8 @@ export const Player = ({
   };
 
   const skipBack = () => {
-    const index = songs.findIndex((x) => x.title == currentSong.title);
-    if (index == 0) {
+    const index = songs.findIndex((x) => x.title === currentSong.title);
+    if (index === 0) {
       setCurrentSong(songs[songs.length - 1]);
     } else {
       setCurrentSong(songs[index - 1]);
@@ -49,7 +49,7 @@ export const Player = ({
 
   useEffect(() => {
     audioElem.current.loop = playInLoop;
-  }, [playInLoop]);
+  }, [playInLoop, audioElem]);
 
   const Muted = () => {
     setMutedSong(!mutedSong);
@@ -84,13 +84,23 @@ export const Player = ({
   console.log(currentSong.duration);
   return (
     <div className="containerMusic">
-      <img
-        src={currentSong.image}
-        width="300px"
-      />
-      
-      <p style={{ textAlign: "center",marginBottom:"4px",fontWeight:"bold" }}>{currentSong.title}</p>
-      <p style={{ textAlign: "center", fontSize:"14px", marginTop:"0px", color:"#272727" }}>{currentSong.artist}</p>
+      <img src={currentSong.image} width="300px" alt={currentSong.title}/>
+
+      <p
+        style={{ textAlign: "center", marginBottom: "4px", fontWeight: "bold" }}
+      >
+        {currentSong.title}
+      </p>
+      <p
+        style={{
+          textAlign: "center",
+          fontSize: "14px",
+          marginTop: "0px",
+          color: "#272727",
+        }}
+      >
+        {currentSong.artist}
+      </p>
       <div className="rangePlayer">
         <div className="musicTime">
           {currentSong.length === undefined || currentSong.duration === 0 ? (
